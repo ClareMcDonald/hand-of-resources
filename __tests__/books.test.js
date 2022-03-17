@@ -14,8 +14,8 @@ describe('books routes', () => {
 
   it('creates a book', async () => {
     const expected = {
-      name: "An Absolutely Remarkable Thing",
-      author: "Hank Green",
+      name: 'An Absolutely Remarkable Thing',
+      author: 'Hank Green',
       published: 2018
     };
 
