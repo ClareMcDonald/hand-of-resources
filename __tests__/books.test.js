@@ -14,12 +14,12 @@ describe('books routes', () => {
 
   it('creates a book', async () => {
     const expected = {
-      name: 'An Absolutely Remarkable Thing',
+      title: 'An Absolutely Remarkable Thing',
       author: 'Hank Green',
       published: 2018
     };
 
-    const res = await (await request(app).post('api/v1/books')).setEncoding(expected);
+    const res = await request(app).post('/api/v1/books').send(expected);
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
