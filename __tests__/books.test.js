@@ -31,4 +31,16 @@ describe('books routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('gets a book by id', async () => {
+    const book = {
+      title: 'An Absolutely Remarkable Thing',
+      author: 'Hank Green',
+      published: 2018
+    };
+    const returnedBook = await request(app).post('/api/v1/books').send(book);
+    const res = await request(app).get(`/api/v1/books/${returnedBook.body.id}`);
+
+    expect(res.body).toEqual({ ...returnedBook.body });
+  });
 }); 
