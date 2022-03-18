@@ -24,4 +24,12 @@ describe('candy routes', () => {
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('gets a list of candies', async () => {
+    const expected = await Candy.findAll();
+
+    const res = await request(app).get('/api/v1/candies');
+
+    expect(res.body).toEqual(expected);
+  });
 });
