@@ -45,4 +45,19 @@ describe('candy routes', () => {
     expect(res.body).toEqual({ id: expect.any(String), ...returnedCandy.body });
   });
     
+  it('updates a candy by id', async () => {
+    const candy = await Candy.insert({
+      name: 'Reeses',
+      manufacturer: 'The Hershey Company',
+      ranking: 10
+    });
+    
+    const res = await request(app)
+      .patch(`/api/v1/candies/${candy.id}`)
+      .send({ ranking: 11 });
+    
+    const expected = { id: expect.any(String), ...candy, ranking: 11 };
+
+    expect(res.body).toEqual(expected);
+  });
 });
