@@ -4,6 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const Movie = require('../lib/models/Movie');
 const books = require('../lib/controllers/books');
+const Book = require('../lib/models/Book');
 
 describe('movie routes', () => {
   beforeEach(() => {
@@ -58,6 +59,18 @@ describe('movie routes', () => {
     
     const expected = { id: expect.any(String), ...movie, released: 2007 };
 
+    expect(res.body).toEqual(expected);
+  });
+    
+  it('deletes a movie by id', async () => {
+    const movie = await Movie.insert({
+      title: 'Little Miss Sunshine',
+      director: 'Jonathan Dayton and Valerie Faris',
+      released: 2006
+    });
+    const expected = await Movie.findById(movie.id);
+    const res = await request(app).delete(`/api/v1/movies/${expected.id}`);
+      
     expect(res.body).toEqual(expected);
   });
 });
