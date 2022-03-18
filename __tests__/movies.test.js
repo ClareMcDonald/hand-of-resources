@@ -31,4 +31,16 @@ describe('movie routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+    
+  it('gets a movie by id', async () => {
+    const movie = {
+      title: 'Little Miss Sunshine',
+      director: 'Jonathan Dayton and Valerie Faris',
+      released: 2006
+    };
+    const returnedMovie = await request(app).post('/api/v1/movies').send(movie);
+    const res = await request(app).get(`/api/v1/movies/${returnedMovie.body.id}`);
+
+    expect(res.body).toEqual({ ...returnedMovie.body });
+  });
 });
