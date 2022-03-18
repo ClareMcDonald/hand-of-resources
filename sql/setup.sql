@@ -9,3 +9,7 @@ CREATE TABLE books (
     published INT NOT NULL
 );
 
+INSERT INTO
+  books (title, author, published)
+VALUES
+  ('An Absolutely Remarkable Thing', 'Hank Green', 2018);

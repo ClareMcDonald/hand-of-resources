@@ -43,4 +43,20 @@ describe('books routes', () => {
 
     expect(res.body).toEqual({ ...returnedBook.body });
   });
+
+  it('updates a book by id', async () => {
+    const book = await Book.insert({
+      title: 'An Absolutely Remarkable Thing',
+      author: 'Hank Green',
+      published: 2018
+    });
+
+    const res = await request(app) 
+      .patch(`/api/v1/books/${book.id}`)
+      .send({ published: 2019 });
+    
+    const expected = { id: expect.any(String), ...book, published: 2019 };
+
+    expect(res.body).toEqual(expected);
+  });
 }); 
