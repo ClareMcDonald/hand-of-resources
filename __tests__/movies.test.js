@@ -3,8 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Movie = require('../lib/models/Movie');
-const books = require('../lib/controllers/books');
-const Book = require('../lib/models/Book');
 
 describe('movie routes', () => {
   beforeEach(() => {
