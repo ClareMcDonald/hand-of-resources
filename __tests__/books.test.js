@@ -59,4 +59,16 @@ describe('books routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('deletes a book by id', async () => {
+    const book = await Book.insert({
+      title: 'An Absolutely Remarkable Thing',
+      author: 'Hank Green',
+      published: 2018
+    });
+    const expected = await Book.findById(book.id);
+    const res = await request(app).delete(`/api/v1/books/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 }); 
