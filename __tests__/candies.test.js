@@ -32,4 +32,17 @@ describe('candy routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+    
+  it('gets a candy by id', async () => {
+    const candy = {
+      name: 'Reeses',
+      manufacturer: 'The Hershey Company',
+      ranking: 10
+    };
+    const returnedCandy = await request(app).post('/api/v1/candies').send(candy);
+    const res = await request(app).get(`/api/v1/candies/${returnedCandy.body.id}`);
+
+    expect(res.body).toEqual({ id: expect.any(String), ...returnedCandy.body });
+  });
+    
 });
