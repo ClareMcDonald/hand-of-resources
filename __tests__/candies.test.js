@@ -60,4 +60,18 @@ describe('candy routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+    
+  it('deletes a candy by id', async () => {
+    const candy = await Candy.insert({
+      name: 'Reeses',
+      manufacturer: 'The Hershey Company',
+      ranking: 10
+    });
+   
+    const expected = await Candy.findById(candy.id);
+    console.log('expected', expected);
+    const res = await request(app).delete(`/api/v1/candies/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 });
