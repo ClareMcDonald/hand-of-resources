@@ -69,7 +69,6 @@ describe('candy routes', () => {
     });
    
     const expected = await Candy.findById(candy.id);
-    console.log('expected', expected);
     const res = await request(app).delete(`/api/v1/candies/${expected.id}`);
 
     expect(res.body).toEqual(expected);
