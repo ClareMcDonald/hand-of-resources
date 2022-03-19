@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS candies;
 DROP TABLE IF EXISTS songs;
+DROP TABLE IF EXISTS games;
 
 CREATE TABLE books (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -32,6 +33,13 @@ CREATE TABLE songs (
     artist TEXT NOT NULL,
     released INT NOT NULL
 );
+
+CREATE TABLE games (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    publisher TEXT NOT NULL,
+    platforms TEXT[] NOT NULL
+)
 
 -- INSERT INTO
 --   books (title, author, published)
