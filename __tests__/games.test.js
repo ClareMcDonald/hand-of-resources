@@ -30,4 +30,16 @@ describe('game routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+    
+  it('gets a game by id', async () => {
+    const song = {
+      name: 'Animal Crossing',
+      publisher: 'Nintendo',
+      platforms: ['Nintendo 64', 'iQue Player', 'GameCubeWiiWii', 'UNintendo DSNintendo', '3DS', 'iOS', 'Android', 'Nintendo Switch']
+    };
+    const returnedSong = await request(app).post('/api/v1/games').send(song);
+    const res = await request(app).get(`/api/v1/games/${returnedSong.body.id}`);
+
+    expect(res.body).toEqual({ id: expect.any(String), ...returnedSong.body });
+  });
 });
