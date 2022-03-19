@@ -57,4 +57,17 @@ describe('game routes', () => {
     const expected = { id: expect.any(String), ...game, name: 'Animal Crossing :)' };
     expect(res.body).toEqual(expected);
   });
+    
+  it('deletes a game by id', async () => {
+    const game = await Game.insert({
+      name: 'Animal Crossing',
+      publisher: 'Nintendo',
+      platforms: ['Nintendo 64', 'iQue Player', 'GameCubeWiiWii', 'UNintendo DSNintendo', '3DS', 'iOS', 'Android', 'Nintendo Switch']
+    });
+    
+    const expected = await Game.findById(game.id);
+    const res = await request(app).delete(`/api/v1/games/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 });
