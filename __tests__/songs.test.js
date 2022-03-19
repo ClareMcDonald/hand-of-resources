@@ -43,4 +43,20 @@ describe('song routes', () => {
 
     expect(res.body).toEqual({ id: expect.any(String), ...returnedSong.body });
   });
+    
+  it('updates a song by id', async () => {
+    const song = await Song.insert({
+      name: 'King',
+      artist: 'Florence + the Machine',
+      released: 2022
+    });
+      
+    const res = await request(app)
+      .patch(`/api/v1/songs/${song.id}`)
+      .send({ released: 2023 });
+      
+    const expected = { id: expect.any(String), ...song, released: 2023 };
+
+    expect(res.body).toEqual(expected);
+  });
 });
