@@ -59,4 +59,17 @@ describe('song routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+    
+  it('deletes a song by id', async () => {
+    const song = await Song.insert({
+      name: 'King',
+      artist: 'Florence + the Machine',
+      released: 2022
+    });
+      
+    const expected = await Song.findById(song.id);
+    const res = await request(app).delete(`/api/v1/songs/${expected.id}`);
+      
+    expect(res.body).toEqual(expected);
+  });
 });
