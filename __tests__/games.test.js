@@ -42,4 +42,19 @@ describe('game routes', () => {
 
     expect(res.body).toEqual({ id: expect.any(String), ...returnedSong.body });
   });
+    
+  it('updates a game by id', async () => {
+    const game = await Game.insert({
+      name: 'Animal Crossing',
+      publisher: 'Nintendo',
+      platforms: ['Nintendo 64', 'iQue Player', 'GameCubeWiiWii', 'UNintendo DSNintendo', '3DS', 'iOS', 'Android', 'Nintendo Switch']
+    });
+      
+    const res = await request(app)
+      .patch(`/api/v1/games/${game.id}`)
+      .send({ name: 'Animal Crossing :)' });
+    
+    const expected = { id: expect.any(String), ...game, name: 'Animal Crossing :)' };
+    expect(res.body).toEqual(expected);
+  });
 });
