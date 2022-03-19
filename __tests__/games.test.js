@@ -22,5 +22,12 @@ describe('game routes', () => {
     const res = await request(app).post('/api/v1/games').send(expected);
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
-});
+  });
+    
+  it('gets a list of games', async () => {
+    const expected = await Game.findAll();
+    const res = await request(app).get('/api/v1/games');
+
+    expect(res.body).toEqual(expected);
+  });
 });
