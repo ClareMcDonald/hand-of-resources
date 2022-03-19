@@ -31,4 +31,16 @@ describe('song routes', () => {
       
     expect(res.body).toEqual(expected);
   });
+    
+  it('gets a song by id', async () => {
+    const song = {
+      name: 'King',
+      artist: 'Florence + the Machine',
+      released: 2022
+    };
+    const returnedSong = await request(app).post('/api/v1/songs/').send(song); 
+    const res = await request(app).get(`/api/v1/songs/${returnedSong.body.id}`);
+
+    expect(res.body).toEqual({ id: expect.any(String), ...returnedSong.body });
+  });
 });
